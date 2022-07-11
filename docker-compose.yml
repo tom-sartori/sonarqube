@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  sonarqube:
+    build: ./sonarqube
+    container_name: sonarqube
+    hostname: sonarqube.localdomain
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarqube-network
+
+  jenkins:
+    build: ./jenkins
+    container_name: jenkins
+    hostname: jenkins.localdomain
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    networks:
+      - sonarqube-network
+
+networks:
+  sonarqube-network:
+    external:
+      name: sonarqube-network

@@ -1,0 +1,82 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - gitLabApiTokenImpl:
+              apiToken: "{qydkAqdiPVWudN6ST9AA}"
+              description: "token api gitlab"
+              id: "gitlab_tokenapi"
+              scope: GLOBAL
+          - usernamePassword:
+              id: "0c6a5389-f301-48f7-b6fe-b65e0716807c"
+              password: "{adminadmin}"
+              scope: GLOBAL
+              username: "jenkins"
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        # create a user called admin
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  crumbIssuer:
+    strict:
+      checkSessionMatch: false
+      hoursValid: 1
+unclassified:
+  gitLabConnectionConfig:
+    connections:
+      - apiTokenId: "gitlab_tokenapi"
+        clientBuilderId: "autodetect"
+        connectionTimeout: 10
+        ignoreCertificateErrors: false
+        name: "jenkins-cnx"
+        readTimeout: 10
+        url: "http://gitlab13.localdomain/"
+    useAuthenticatedEndpoint: true
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "Adresse pas encore configurée <nobody@nowhere>"
+    url: "http://jenkins2.localdomain:8080/"
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: false
+    installations:
+      - name: "SonarQube"
+        serverUrl: "http://sonarqube.localdomain:9000"
+        triggers:
+          skipScmCause: false
+          skipUpstreamCause: false
+tool:
+  maven:
+    installations:
+      - name: "M3"
+        properties:
+          - installSource:
+              installers:
+                - maven:
+                    id: "3.6.3"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
+  nodejs:
+    installations:
+      - name: "NodeJS"
+        properties:
+          - installSource:
+              installers:
+                - nodeJSInstaller:
+                    id: "14.16.1"
+                    npmPackagesRefreshHours: 72
+  sonarRunnerInstallation:
+    installations:
+      - name: "SonarScanner"
+        properties:
+          - installSource:
+              installers:
+                - sonarRunnerInstaller:
+                    id: "4.6.0.2311"

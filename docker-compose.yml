@@ -21,6 +21,6 @@ services:
       - sonarqube-network
 
 networks:
-  sonarqube-network:
-    external:
-      name: sonarqube-network
+  sonarqube-network: 
+    external: false
+    name: sonarqube-network
